@@ -33,29 +33,51 @@ const SpotifyIcon = () => (
 export default function HomePage() {
   const [hasEntered, setHasEntered] = useState(false)
   const [volume, setVolume] = useState([50])
-  const [isMuted, setIsMuted] = useState(false)
+  const [isMuted, setIsMuted] = useState(true) // Start muted due to browser policies
   const videoRef = useRef<HTMLVideoElement>(null)
 
+  // Update video volume when slider changes
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current && !isMuted) {
       videoRef.current.volume = volume[0] / 100
     }
-  }, [volume])
+  }, [volume, isMuted])
 
   const toggleMute = () => {
     if (videoRef.current) {
-      videoRef.current.muted = !isMuted
-      setIsMuted(!isMuted)
+      const newMutedState = !isMuted
+      videoRef.current.muted = newMutedState
+      setIsMuted(newMutedState)
+      
+      // If unmuting, set the volume
+      if (!newMutedState) {
+        videoRef.current.volume = volume[0] / 100
+      }
+    }
+  }
+
+  const handleVolumeChange = (newVolume: number[]) => {
+    setVolume(newVolume)
+    if (videoRef.current) {
+      videoRef.current.volume = newVolume[0] / 100
+      // If volume is set above 0, unmute automatically
+      if (newVolume[0] > 0 && isMuted) {
+        videoRef.current.muted = false
+        setIsMuted(false)
+      }
+      // If volume is set to 0, mute automatically
+      if (newVolume[0] === 0 && !isMuted) {
+        videoRef.current.muted = true
+        setIsMuted(true)
+      }
     }
   }
 
   const handleEnter = () => {
     setHasEntered(true)
-    // Unmute and play the video when user enters
+    // Start playing the video when user enters (still muted initially due to browser policies)
     if (videoRef.current) {
-      videoRef.current.muted = false
-      videoRef.current.play()
-      setIsMuted(false)
+      videoRef.current.play().catch(console.error)
     }
   }
 
@@ -85,7 +107,7 @@ export default function HomePage() {
         className="fixed inset-0 w-full h-full object-cover z-0"
         autoPlay
         loop
-        muted
+        muted={isMuted}
         playsInline
         preload="auto"
       >
@@ -108,7 +130,7 @@ export default function HomePage() {
         </Button>
         <Slider
           value={volume}
-          onValueChange={setVolume}
+          onValueChange={handleVolumeChange}
           max={100}
           step={1}
           className="w-24 [&>span:first-child]:h-2 [&>span:first-child]:bg-white/30 [&_[role=slider]]:bg-white [&_[role=slider]]:w-4 [&_[role=slider]]:h-4 [&_[role=slider]]:border-2 [&_[role=slider]]:border-white [&_[role=slider]]:shadow-lg [&>span:first-child_span]:bg-white [&_[role=slider]:focus-visible]:ring-2 [&_[role=slider]:focus-visible]:ring-white/50 [&_[role=slider]:focus-visible]:ring-offset-0"
@@ -118,7 +140,7 @@ export default function HomePage() {
       {/* Social Media Icons */}
       <div className="fixed bottom-8 right-8 z-20 flex flex-col gap-4">
         <a
-          href="https://discord.com"
+          href="https://discord.gg/T3ujYXBWkS"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]"
@@ -126,7 +148,7 @@ export default function HomePage() {
           <DiscordIcon />
         </a>
         <a
-          href="https://pinterest.com"
+          href="https://in.pinterest.com/anerzome/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]"
@@ -134,7 +156,7 @@ export default function HomePage() {
           <PinterestIcon />
         </a>
         <a
-          href="https://tumblr.com"
+          href="https://www.tumblr.com/anerzome"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]"
@@ -142,7 +164,7 @@ export default function HomePage() {
           <TumblrIcon />
         </a>
         <a
-          href="https://spotify.com"
+          href="https://open.spotify.com/user/x5pxuwrpptwpbbfxc2sw0nt86?si=00b52c8c95b647ac"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]"
