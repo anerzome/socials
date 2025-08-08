@@ -138,38 +138,46 @@ export default function HomePage() {
       </div>
 
       {/* Social Media Icons */}
-      <div className="fixed bottom-8 right-8 z-20 flex flex-col gap-4">
+      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center justify-center gap-6 bg-black/20 backdrop-blur-sm rounded-full px-8 py-4">
         <a
           href="https://discord.gg/T3ujYXBWkS"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]"
+          className="text-white hover:text-white/80 transition-all duration-300 hover:scale-125 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_16px_rgba(255,255,255,0.9)] w-8 h-8 flex items-center justify-center"
         >
-          <DiscordIcon />
+          <div className="w-7 h-7">
+            <DiscordIcon />
+          </div>
         </a>
         <a
           href="https://in.pinterest.com/anerzome/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]"
+          className="text-white hover:text-white/80 transition-all duration-300 hover:scale-125 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_16px_rgba(255,255,255,0.9)] w-8 h-8 flex items-center justify-center"
         >
-          <PinterestIcon />
+          <div className="w-7 h-7">
+            <PinterestIcon />
+          </div>
         </a>
         <a
           href="https://www.tumblr.com/anerzome"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]"
+          className="text-white hover:text-white/80 transition-all duration-300 hover:scale-125 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_16px_rgba(255,255,255,0.9)] w-8 h-8 flex items-center justify-center"
         >
-          <TumblrIcon />
+          <div className="w-7 h-7">
+            <TumblrIcon />
+          </div>
         </a>
         <a
           href="https://open.spotify.com/user/x5pxuwrpptwpbbfxc2sw0nt86?si=00b52c8c95b647ac"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white hover:text-white/80 transition-all duration-300 hover:scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]"
+          className="text-white hover:text-white/80 transition-all duration-300 hover:scale-125 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] hover:drop-shadow-[0_0_16px_rgba(255,255,255,0.9)] w-8 h-8 flex items-center justify-center"
         >
-          <SpotifyIcon />
+          <div className="w-7 h-7">
+            <SpotifyIcon />
+          </div>
         </a>
       </div>
 
